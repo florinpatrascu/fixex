@@ -3,7 +3,8 @@ defmodule Fixex.Ruby do
   simple adapter for interacting with external apps written in Python or Ruby,
   via the [ErlPort](http://erlport.org/) library
   """
-  use Fixex
+  use Fixex.Adapter
+
   def start_link(opts \\ [])
   def start_link(opts) when is_list(opts), do: :ruby.start(opts)
 
