@@ -1,0 +1,3 @@
+def hi
+  "Hi!"
+end
