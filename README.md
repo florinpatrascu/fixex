@@ -7,6 +7,7 @@ With `FixEx` you can write or reuse simple Ruby/Python scripts as fixtures in yo
 Using `FixEx` is very simple. Given the following Python Script:
 
 ```python
+# hello.py
 def name(name):
     str = "Hello " + name + "!"
     return str
