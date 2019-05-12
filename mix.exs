@@ -10,6 +10,8 @@ defmodule Fixex.MixProject do
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      description:
+        "FixEx adds a simple support for integrating ExUnit with external apps/cli, for using them as external fixtures providers",
       package: package()
     ]
   end
