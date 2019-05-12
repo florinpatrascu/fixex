@@ -4,8 +4,8 @@ defmodule ErlPortTest do
   alias Fixex.{Ruby, Python}
 
   @scripts_path "test/erl_port/scripts"
-  @python_opts [{:python_path, to_charlist(@scripts_path)}]
-  @ruby_opts [{:ruby_lib, to_charlist(@scripts_path)}]
+  @python_opts [python_path: to_charlist(@scripts_path)]
+  @ruby_opts [ruby_lib: to_charlist(@scripts_path)]
 
   setup_all do
     {:ok, ruby} = Ruby.start_link(@ruby_opts)
