@@ -30,7 +30,8 @@ defmodule Fixex.MixProject do
 
       # Testing, linting dependencies
       {:dialyxir, "1.0.0-rc.6", only: [:dev], runtime: false},
-      {:mix_test_watch, "~> 0.9", only: [:dev, :test]}
+      {:mix_test_watch, "~> 0.9", only: [:dev, :test]},
+      {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
 
