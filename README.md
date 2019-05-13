@@ -22,7 +22,7 @@ fix "converse with Python and send args", %{fix: fix} do
 end
 ```
 
-That's all! Ok, as a "bonus" you can call the afore mentioned external scripts, in your Elixir app as well. Here's how:
+That's all! Ok, as a "bonus" you can call the scripts mentioned above, in your Elixir app as well. Here's how:
 
 ```elixir
 defmodule Fixex.ApiTest do
