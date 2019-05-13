@@ -17,6 +17,7 @@ defmodule Fixex.Adapter do
     end
   end
 
+  @type t :: __MODULE__
   @type opts :: list
 
   @callback start_link(Keyword.t()) :: Supervisor.on_start()

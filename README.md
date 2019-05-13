@@ -25,28 +25,22 @@ end
 That's all! Ok, as a "bonus" you can call the afore mentioned external scripts, in your Elixir app as well. Here's how:
 
 ```elixir
-defmodule ErlPortTest do
+defmodule Fixex.ApiTest do
   use ExUnit.Case
 
-  alias Fixex.{Ruby, Python}
-
-  @scripts_path "test/erl_port/scripts"
-  @python_opts [python_path: to_charlist(@scripts_path)]
-  @ruby_opts [ruby_lib: to_charlist(@scripts_path)]
+  @python {Fixex,
+           adapter: Fixex.Python,
+           config: [python_path: to_charlist("test/erl_port/scripts")]}
 
   setup_all do
-    {:ok, ruby} = Ruby.start_link(@ruby_opts)
-    {:ok, python} = Python.start_link(@python_opts)
-
-    %{ruby: ruby, python: python}
+    {:ok, python} = start_supervised(@python)
+    {:ok, adapter: python}
   end
 
-  test "Python says: Hi!", %{python: python} do
-    assert "Hi!" == Python.call(python, :hello, :hi)
-  end
-
-  test "Ruby says: Hi!", %{ruby: ruby} do
-    assert "Hi!" == Ruby.call(ruby, :hello, :hi)
+  describe "API for general use" do
+    test "use Fixex to call Python", %{adapter: python} do
+      assert "Hello Joe!" == Fixex.call(python, :hello, :name, "Joe")
+    end
   end
 end
 ```

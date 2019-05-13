@@ -2,6 +2,7 @@ defmodule Fixex do
   @moduledoc """
   Specification of the Fixex adapter API implemented by various custom implementations
   """
+  use GenServer
 
   defmacro __using__(opts) do
     quote do
@@ -108,5 +109,33 @@ defmodule Fixex do
     Module.delete_attribute(mod, :fix)
 
     name
+  end
+
+  def start_link([adapter: adapter, config: _config] = args)
+      when adapter in [Fixex.Python, Fixex.Ruby] do
+    GenServer.start_link(__MODULE__, args)
+  end
+
+  def start_link(config),
+    do: raise(ArgumentError, "unexpectedly bad config :) GoT this: #{inspect(config)}")
+
+  def init(adapter: adapter, config: config) do
+    {:ok, pid} = apply(adapter, :start_link, [config])
+
+    {:ok, %{adapter: adapter, pid: pid}}
+  end
+
+  @spec call(pid, module, function | any, list) :: {:ok, any} | {:error, any} | any
+  def call(pid, mod, fun, args, timeout \\ 5000)
+
+  def call(pid, mod, fun, args, timeout) when is_list(args) do
+    GenServer.call(pid, {:call, mod, fun, args}, timeout)
+  end
+
+  def call(pid, mod, fun, arg, timeout), do: call(pid, mod, fun, List.wrap(arg), timeout)
+
+  def handle_call({:call, mod, fun, args}, _from, %{adapter: adapter, pid: pid} = state) do
+    response = apply(adapter, :call, [pid, mod, fun, args])
+    {:reply, response, state}
   end
 end
