@@ -12,7 +12,7 @@ defmodule Fixex.ApiTest do
 
   describe "API for general use" do
     test "use Fixex to call Python", %{adapter: python} do
-      assert "Hello Joe!" == Fixex.call(python, :hello, :name, "Joe")
+      assert "Goodbye Joe :'(" == Fixex.call(python, :hello, :goodbye, "Joe")
     end
   end
 end

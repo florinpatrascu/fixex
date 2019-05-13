@@ -30,7 +30,9 @@ defmodule Fixex.ApiTest do
 
   @python {Fixex,
            adapter: Fixex.Python,
-           config: [python_path: to_charlist("test/erl_port/scripts")]}
+           config: [
+             python_path: to_charlist("test/erl_port/scripts")
+           ]}
 
   setup_all do
     {:ok, python} = start_supervised(@python)
@@ -39,7 +41,7 @@ defmodule Fixex.ApiTest do
 
   describe "API for general use" do
     test "use Fixex to call Python", %{adapter: python} do
-      assert "Hello Joe!" == Fixex.call(python, :hello, :name, "Joe")
+      assert "Goodbye Joe :'(" == Fixex.call(python, :hello, :goodbye, "Joe")
     end
   end
 end
