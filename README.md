@@ -65,8 +65,7 @@ Mind you, this is work in progress, any PRs or feedback will be more than welcom
 - Commit your changes (`git commit -am 'Add some feature'`)
 - Push to the branch (`git push origin my-new-feature`)
 - Create new Pull Request
-
-Receive my eternal :heart: :)
+- Receive my eternal :heart: :)
 
 ## License
 
